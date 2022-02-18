@@ -29,7 +29,10 @@ export const getData = async()=>{
     return drinksArray;
 }
 
-getData()
+
+
+  
+});
 
 let sql=`INSERT INTO cocktailDB.drinks(
   idDrink ,strDrink , strDrinkAlternate,  strTags ,strVideo, strCategory, strIBA, strAlcoholic, strGlass, strInstructions, strInstructionsES,  
