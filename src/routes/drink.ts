@@ -6,7 +6,7 @@ let router = express.Router();
 conn;
 
 const drinksArray:drinksResponce[]=[];
-let drinksArray2:any;
+let drinksArray2:Drink[]=[];
 let drinksArray3=Array();
 let drinksArray4:drinksResponce[]=[];
 
@@ -30,9 +30,7 @@ export const getData = async()=>{
 }
 
 
-
-  
-});
+getData()
 
 let sql=`INSERT INTO cocktailDB.drinks(
   idDrink ,strDrink , strDrinkAlternate,  strTags ,strVideo, strCategory, strIBA, strAlcoholic, strGlass, strInstructions, strInstructionsES,  
@@ -145,9 +143,9 @@ router.get('/', async(_, res:Response)=>{
   //post from API into database
   router.post('/', async(_, res) => {
       try {
-          (await getData()).forEach((drinks)=>{
-            if(drinks!==null){
-              drinks.drinks.forEach((drinks)=>{
+          (await  getData()).forEach((drink)=>{
+            if(drink.drinks!==undefined){
+              drink.drinks.forEach((drinks)=>{
                     conn.query(sql,
                       [
                       drinks.idDrink, drinks.strDrink, drinks.strDrinkAlternate, drinks.strTags,
@@ -159,7 +157,7 @@ router.get('/', async(_, res:Response)=>{
                     ], function (err: any, result:drinksResponce[]) {
                       if (err){
                         throw {message: err};
-                      }else if(result.length===countRows()){
+                      }else if(result.length ===countRows()){
                         return
                       }else{
                         drinksArray2.push(drinks);
@@ -169,7 +167,6 @@ router.get('/', async(_, res:Response)=>{
             }
           }) 
       }catch (err) {
-        console.log("qui")
           res.status(500).json({ message: err });
           
       }
@@ -227,7 +224,7 @@ router.get('/', async(_, res:Response)=>{
             });
        
     }catch (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json({ message: "qui" });
     }
    });
       

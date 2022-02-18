@@ -57,7 +57,7 @@ var mysql_1 = __importDefault(require("../mysql"));
 var router = express_1.default.Router();
 mysql_1.default;
 var drinksArray = [];
-var drinksArray2;
+var drinksArray2 = [];
 var drinksArray3 = Array();
 var drinksArray4 = [];
 var getData = function () { return __awaiter(void 0, void 0, void 0, function () {
@@ -212,9 +212,9 @@ router.post('/', function (_, res) { return __awaiter(void 0, void 0, void 0, fu
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, (0, exports.getData)()];
             case 1:
-                (_a.sent()).forEach(function (drinks) {
-                    if (drinks !== null) {
-                        drinks.drinks.forEach(function (drinks) {
+                (_a.sent()).forEach(function (drink) {
+                    if (drink.drinks !== undefined) {
+                        drink.drinks.forEach(function (drinks) {
                             mysql_1.default.query(sql, [
                                 drinks.idDrink, drinks.strDrink, drinks.strDrinkAlternate, drinks.strTags,
                                 drinks.strVideo, drinks.strCategory, drinks.strIBA, drinks.strAlcoholic, drinks.strGlass,
@@ -239,7 +239,6 @@ router.post('/', function (_, res) { return __awaiter(void 0, void 0, void 0, fu
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                console.log("qui");
                 res.status(500).json({ message: err_1 });
                 return [3 /*break*/, 3];
             case 3:
@@ -295,7 +294,7 @@ router.post('/drink', function (_a, res) {
         });
     }
     catch (err) {
-        res.status(500).json({ message: err });
+        res.status(500).json({ message: "qui" });
     }
 });
 exports.default = router;
